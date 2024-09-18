@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from blog.models import Post
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import FormValidMixin, FieldMixin
 
@@ -25,5 +25,11 @@ class PostList(LoginRequiredMixin, ListView):
 
 class CreatePost(LoginRequiredMixin, FormValidMixin, FieldMixin, CreateView):
     model = Post
+    template_name = "cadmin/create_update_post.html"
+    success_url = reverse_lazy("cadmin:post_list")
+
+
+class UpdatePostView(LoginRequiredMixin, FormValidMixin, FieldMixin, UpdateView):
+
     template_name = "cadmin/create_update_post.html"
     success_url = reverse_lazy("cadmin:post_list")
