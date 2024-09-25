@@ -27,7 +27,14 @@
                     <td>{{post.body|truncatewords:30}}</td>
                     <td>{{post.status}}</td>
                     <td>{{post.jpublish}}</td>
-                    <td></td>
+                    <td><a class="btn btn-app" href = "{% url "cadmin:update_post" post.pk %}">
+                      <i class="fa fa-edit"></i> ویرایش
+                    </a>
+                    {% if user.is_superuser %}
+                    <a type="button" class="btn btn-block btn-outline-danger btn-sm" href = "{% url "cadmin:delete_post" post.pk %}" >حذف</a>
+                    {% endif %}
+                  
+                    </td>
                 </tr>
                 {% endfor %}
                
