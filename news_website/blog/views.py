@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from .forms import CommentForm
 from taggit.models import Tag
 from django.db.models import Count
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -22,6 +23,9 @@ def post_list(request, category_slug=None, author_pk=None, tag_slug=None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = posts.filter(tags=tag)
+    paginator = Paginator(posts, 2)
+    page_number = request.GET.get("page")
+    posts = paginator.get_page(page_number)
     return render(request, "blog/index.html", {"posts": posts})
 
 

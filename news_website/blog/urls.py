@@ -5,6 +5,7 @@ app_name = "blog"
 
 urlpatterns = [
     path("", post_list, name="post_list"),
+    # path("page/<int:page>/", post_list, name="post_list"),
     path("category/<slug:category_slug>/", post_list, name="category_list"),
     path("author/<int:author_pk>/", post_list, name="author_list"),
     re_path(
