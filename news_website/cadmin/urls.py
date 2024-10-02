@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import PostList, CreatePost, UpdatePostView, DeletePostView
 
 app_name = "cadmin"
@@ -9,4 +9,5 @@ urlpatterns = [
     path("create_post/", CreatePost.as_view(), name="create_post"),
     path("update_post/<int:pk>/", UpdatePostView.as_view(), name="update_post"),
     path("delete_post/<int:pk>/delete/", DeletePostView.as_view(), name="delete_post"),
+    path("api/v1/", include("cadmin.api.v1.urls")),
 ]

@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from .views import post_list, post_detail
 
 app_name = "blog"
@@ -19,4 +19,5 @@ urlpatterns = [
         name="comment_edit",
     ),
     re_path(r"^tag/(?P<tag_slug>[-\w]+)/", post_list, name="tag_list"),
+    path("api/v1/", include("blog.api.v1.urls")),
 ]

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "cadmin.apps.CadminConfig",
     # libraries
     "taggit",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,10 @@ AUTH_USER_MODEL = "accounts.User"
 
 # LOGIN_REDIRECT_URL = ''
 LOGIN_URL = "accounts:login"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ]
+}

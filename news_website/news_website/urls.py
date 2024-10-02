@@ -25,6 +25,7 @@ urlpatterns = [
     path("blog/", include("blog.urls", namespace="blog")),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("cadmin/", include("cadmin.urls", namespace="cadmin")),
+    path("api-auth/", include("rest_framework.urls")),
 ]
 
 if settings.DEBUG:
