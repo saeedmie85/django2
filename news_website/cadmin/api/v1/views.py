@@ -5,12 +5,12 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAdminUser,
 )
-from .serializers import PostSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import generics
 from .permisions import IsAuthorUser
+from .mixins import AuthorMixin
 
 
 # class PostListApiView(APIView):
@@ -26,12 +26,9 @@ from .permisions import IsAuthorUser
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class PostListApiView(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+class PostListApiView(AuthorMixin, generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAuthorUser]
 
 
-class PostDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+class PostDetailApiView(AuthorMixin, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsAuthorUser]

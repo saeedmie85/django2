@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-g+vk@=+1^8cf=(m5w+7=ecme7_pcu8zt+%r(=q^5g0=5z4xkr0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # libraries
     "taggit",
     "rest_framework",
+    "drf_spectacular",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -144,7 +146,14 @@ LOGIN_URL = "accounts:login"
 
 
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }

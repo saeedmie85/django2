@@ -51,19 +51,20 @@ class UserVerifyView(View):
         if form.is_valid():
             code = form.cleaned_data["code"]
             if code == code_instance.code:
-                User.objects.create(
+                user = User(
                     phone_number=user_session["phone_number"],
                     email=user_session["email"],
                     about_me=user_session["about_me"],
                     first_name=user_session["first_name"],
                     last_name=user_session["last_name"],
-                    password=user_session["password"],
                 )
+                user.set_password(user_session["password"])
+                user.save()
                 code_instance.delete()
                 user = authenticate(
                     request,
                     phone_number=user_session["phone_number"],
-                    password=user_session["password"],
+                    password=user.password,
                 )
                 if user is not None:
                     login(request, user)
