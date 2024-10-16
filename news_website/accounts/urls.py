@@ -8,4 +8,5 @@ urlpatterns = [
     path("verify/", UserVerifyView.as_view(), name="verify"),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", logoutView.as_view(), name="logout"),
+    path("api/v1/", include("accounts.api.v1.urls")),
 ]
